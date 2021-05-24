@@ -6,94 +6,95 @@ import { ErrorMessage } from './ErrorMessage';
 import { FormButton } from './FormButton';
 import { FormContainer } from './FormContainer';
 
-const FormItem = Form.Item;
+const SignUpForm = ({ form, onSubmit }) => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, serConfirmPassword] = useState('');
+    const [error, setError] = useState(null);
 
-const INITIAL_STATE = {
-    username: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null,
-};
+    const FormItem = Form.Item;
 
-class SignUpForm extends Component {
-    state = { ...INITIAL_STATE };
-
-    onSubmit(event) {
-        const { email, passwordOne, username } = this.state;
-
-        this.props.onSubmit(email, passwordOne, username).catch(error => {
-            this.setState(byPropKey('error', error.message));
-        });
-
+    const onsubmit = event => {
         event.preventDefault();
-    }
+        const submitButton = document.querySelector('.signup-form-button');
+        submitButton.disabled = true;
+        if (newPassword !== confirmPassword) {
+            setError('new password and confirm password do not match');
+        } else {
+            onSubmit(email, newPassword, username)
+                .then(() => {
+                    submitButton.disabled = false;
+                })
+                .catch(error => {
+                    submitButton.disabled = false;
+                    setError(error.message);
+                });
+        }
+    };
 
-    render() {
-        const { getFieldDecorator } = this.props.form;
-        const { error } = this.state;
+    const { getFieldDecorator } = form;
 
-        return (
-            <FormContainer>
-                <h1 className="title">Sign Up</h1>
-                <Form onSubmit={event => this.onSubmit(event)} className="login-form">
-                    <FormItem>
-                        {getFieldDecorator('username', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="Username"
-                                onChange={event => this.setState(byPropKey('username', event.target.value))}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('email', {
-                            rules: [{ required: true, message: 'Please input your email!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="Email"
-                                onChange={event => this.setState(byPropKey('email', event.target.value))}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('passwordOne', {
-                            rules: [{ required: true, message: 'Please input your passwordOne!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="Password"
-                                onChange={event => this.setState(byPropKey('passwordOne', event.target.value))}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('passwordTwo', {
-                            rules: [{ required: true, message: 'Please input your passwordTwo!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="Confirm password"
-                                onChange={event => this.setState(byPropKey('passwordTwo', event.target.value))}
-                            />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        <FormButton type="primary" htmlType="submit" className="login-form-button">
-                            Sign Up
-                        </FormButton>
-                    </FormItem>
-                    <ErrorMessage>{error}</ErrorMessage>
-                </Form>
-            </FormContainer>
-        );
-    }
-}
+    return (
+        <FormContainer>
+            <h1 className="title">Sign Up</h1>
+            <Form onSubmit={event => onsubmit(event)} className="login-form">
+                <FormItem>
+                    {getFieldDecorator('username', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Username"
+                            onChange={event => setUsername(event.target.value)}
+                        />
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('email', {
+                        rules: [{ required: true, message: 'Please input your email!' }],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Email"
+                            onChange={event => setEmail(event.target.value)}
+                        />
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('newPassword', {
+                        rules: [{ required: true, message: 'Please input your new password!' }],
+                    })(
+                        <Input
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="password"
+                            placeholder="Password"
+                            onChange={event => setNewPassword(event.target.value)}
+                        />
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('confirmPassword', {
+                        rules: [{ required: true, message: 'Please input your confirm password!' }],
+                    })(
+                        <Input
+                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            type="password"
+                            placeholder="Confirm password"
+                            onChange={event => serConfirmPassword(event.target.value)}
+                        />
+                    )}
+                </FormItem>
+                <FormItem>
+                    <FormButton type="primary" htmlType="submit" className="login-form-button signup-form-button">
+                        Sign Up
+                    </FormButton>
+                </FormItem>
+                <ErrorMessage>{error}</ErrorMessage>
+            </Form>
+        </FormContainer>
+    );
+};
 
 const WrappedSignUpForm = Form.create()(SignUpForm);
 
