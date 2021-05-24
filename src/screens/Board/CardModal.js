@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
 import { Icon, Modal } from 'antd';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+
+import { CardDescription } from './components/CardDescription';
 import { CardDetail } from './components/CardDetail';
 import { CardLabel } from './components/CardLabel';
-import styled from 'styled-components';
-import { CardDescription } from './components/CardDescription';
 
 export class CardModal extends Component {
     state = {

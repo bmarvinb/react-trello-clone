@@ -1,5 +1,13 @@
+import { DragDropContext } from 'react-dnd';
+import { findIndex, isEmpty } from 'lodash';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { List } from 'antd';
 import React, { Component } from 'react';
-import { mergeDataWithKey } from '../../utils';
+import { withRouter } from 'react-router-dom';
+
+import { AddList, Lists } from './styled';
+import { BoardTitle } from './components/BoardTitle';
+import Cards from './Cards';
 import {
     doCreateList,
     doDeleteBoard,
@@ -10,18 +18,11 @@ import {
     onceGetBoard,
     onceGetLists,
 } from '../../core/api/db';
-import { findIndex, isEmpty } from 'lodash';
-import { Loader } from '../../components/Loader';
-import { AddList, Lists } from './styled';
-import { List } from 'antd';
 import { FormCreation } from './FormCreation';
-import { withRouter } from 'react-router-dom';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import { ListHeader } from './components/ListHeader';
-import { BoardTitle } from './components/BoardTitle';
+import { Loader } from '../../components/Loader';
+import { mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
-import Cards from './Cards';
 
 class BoardScreen extends Component {
     state = {

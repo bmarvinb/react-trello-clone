@@ -1,8 +1,9 @@
+import React from 'react';
+
 import { FormContainer } from './components/FormContainer';
-import { WrappedSignInForm } from './components/SignInForm';
 import { PasswordForgetLink } from './components/PasswordForgetLink';
 import { SignUpLink } from './components/SignUpLink';
-import React from 'react';
+import { WrappedSignInForm } from './components/SignInForm';
 
 export const SignInScreen = ({ history }) => (
     <FormContainer>

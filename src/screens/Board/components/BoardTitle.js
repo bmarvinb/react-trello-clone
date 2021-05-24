@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
 import { darken } from 'polished';
 import { Icon, Menu, Dropdown, Input } from 'antd';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import { Button } from '../../../components/Button';
 
 export class BoardTitle extends Component {

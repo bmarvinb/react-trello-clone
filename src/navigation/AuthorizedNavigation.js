@@ -1,11 +1,12 @@
-import { ACCOUNT, BOARDS } from '../core/routes/routes';
-import React, { Component } from 'react';
-import { SignOutButton } from '../auth/SignOut';
 import { Dropdown, Icon, Menu } from 'antd';
-import { Nav, NavItems, NavUser } from './styled';
 import { Link, withRouter } from 'react-router-dom';
-import { Button } from '../components/Button';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+
+import { ACCOUNT, BOARDS } from '../core/routes/routes';
+import { Button } from '../components/Button';
+import { Nav, NavItems, NavUser } from './styled';
+import { SignOutButton } from '../auth/SignOut';
 
 class NavigationAuth extends Component {
     render() {

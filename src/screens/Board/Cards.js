@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import { findIndex } from 'lodash';
-import { mergeDataWithKey } from '../../utils';
+import React, { Component } from 'react';
+
+import CardContainer from './CardContainer';
 import { doAddCard, doDeleteCard, doEditCard, doMoveCard, onceGetCard } from '../../core/api/db';
 import { FormCreation } from './FormCreation';
-import CardContainer from './CardContainer';
 import { ItemTypes } from '../../core/constants';
+import { mergeDataWithKey } from '../../utils';
 
 const cardTarget = {
     drop(props, monitor, component) {

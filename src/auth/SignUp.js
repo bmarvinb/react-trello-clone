@@ -1,9 +1,10 @@
-import WrappedSignUpForm from './components/SignUpForm';
 import React, { Component } from 'react';
-import { doCreateUserWithEmailAndPassword } from './api/auth';
-import { doCreateUser } from '../core/api/db';
-import { BOARDS } from '../core/routes/routes';
 import { withRouter } from 'react-router-dom';
+
+import { BOARDS } from '../core/routes/routes';
+import { doCreateUser } from '../core/api/db';
+import { doCreateUserWithEmailAndPassword } from './api/auth';
+import WrappedSignUpForm from './components/SignUpForm';
 
 class SignUpScreen extends Component {
     async onSubmit(email, password, username) {

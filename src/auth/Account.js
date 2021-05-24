@@ -1,11 +1,12 @@
-import { byPropKey } from '../utils';
 import { Form, Icon, Input } from 'antd';
+import React, { Component } from 'react';
+
+import { AuthUserContext } from './utils/AuthUserContext';
+import { byPropKey } from '../utils';
+import { doPasswordUpdate } from './api/auth';
+import { ErrorMessage } from './components/ErrorMessage';
 import { FormButton } from './components/FormButton';
 import { FormContainer } from './components/FormContainer';
-import { doPasswordUpdate } from './api/auth';
-import React, { Component } from 'react';
-import { AuthUserContext } from './utils/AuthUserContext';
-import { ErrorMessage } from './components/ErrorMessage';
 import { withAuthorization } from './utils/AuthHOC';
 
 const FormItem = Form.Item;

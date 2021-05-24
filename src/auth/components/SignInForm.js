@@ -1,11 +1,12 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
-import { doSignInWithEmailAndPassword } from '../api/auth';
+
 import { BOARDS } from '../../core/routes/routes';
 import { byPropKey } from '../../utils';
-import { FormContainer } from './FormContainer';
+import { doSignInWithEmailAndPassword } from '../api/auth';
 import { ErrorMessage } from './ErrorMessage';
 import { FormButton } from './FormButton';
+import { FormContainer } from './FormContainer';
 
 const FormItem = Form.Item;
 

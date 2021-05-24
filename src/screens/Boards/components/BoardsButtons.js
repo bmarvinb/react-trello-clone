@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
 import { darken } from 'polished';
 import { Icon } from 'antd';
+import React from 'react';
+import styled from 'styled-components';
 
 export const StyledBoardLink = styled.div`
     position: relative;

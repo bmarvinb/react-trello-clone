@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Routes from './core/routes';
+
 import { GlobalStyle } from './global-styles';
+import Routes from './core/routes';
 
 export default class App extends Component {
     render() {

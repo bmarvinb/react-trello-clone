@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { darken } from 'polished';
+import styled from 'styled-components';
 
 const Nav = styled.nav`
     background: ${darken(0.075, '#0079BF')};

@@ -1,10 +1,11 @@
 import { Form, Icon, Input } from 'antd';
 import React, { Component } from 'react';
+
 import { byPropKey } from '../utils';
-import { FormContainer } from './components/FormContainer';
 import { doPasswordReset } from './api/auth';
-import { FormButton } from './components/FormButton';
 import { ErrorMessage } from './components/ErrorMessage';
+import { FormButton } from './components/FormButton';
+import { FormContainer } from './components/FormContainer';
 
 const FormItem = Form.Item;
 

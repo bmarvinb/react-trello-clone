@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AuthUserContext } from '../auth/utils/AuthUserContext';
 import AuthorizedNavigation from './AuthorizedNavigation';
+import { AuthUserContext } from '../auth/utils/AuthUserContext';
 import UnauthorizedNavigation from './UnauthorizedNavigation';
 
 export const Navigation = () => (

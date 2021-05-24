@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { mergeDataWithKey } from '../../utils';
-import { doCreateBoard, onceGetBoards } from '../../core/api/db';
-import { Loader } from '../../components/Loader';
-import { Boards, BoardTypes, BoardTypeTitle } from './styled';
-import { isEmpty } from 'lodash';
 import { Icon } from 'antd';
+import { isEmpty } from 'lodash';
+import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+
+import { Boards, BoardTypes, BoardTypeTitle } from './styled';
 import { BoardLink, NewBoard } from './components/BoardsButtons';
 import { CreateBoardModal } from './CreateBoardModal';
-import { Link } from 'react-router-dom';
+import { doCreateBoard, onceGetBoards } from '../../core/api/db';
+import { Loader } from '../../components/Loader';
+import { mergeDataWithKey } from '../../utils';
 import { withAuthorization } from '../../auth/utils/AuthHOC';
 
 class BoardsScreen extends Component {

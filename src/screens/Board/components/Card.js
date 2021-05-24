@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { GrayButton } from '../../../components/Button';
-import { Icon, Input } from 'antd';
 import { find } from 'lodash';
+import { Icon, Input } from 'antd';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+
+import { GrayButton } from '../../../components/Button';
 import { Label } from './Label';
 import { LABELS } from '../../../core/constants';
 

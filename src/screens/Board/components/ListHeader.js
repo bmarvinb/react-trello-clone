@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Dropdown, Icon, Input, Menu } from 'antd';
-import styled from 'styled-components';
 import { darken } from 'polished';
+import { Dropdown, Icon, Input, Menu } from 'antd';
+import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import { Button } from '../../../components/Button';
 
 export class ListHeader extends Component {
