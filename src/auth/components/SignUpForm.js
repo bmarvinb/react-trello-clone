@@ -1,10 +1,12 @@
 import { Form, Icon, Input } from 'antd';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { isEmail } from 'validator';
 
 import { byPropKey } from '../../utils';
 import { ErrorMessage } from './ErrorMessage';
 import { FormButton } from './FormButton';
 import { FormContainer } from './FormContainer';
+import { EMAIL_ERROR_TYPES } from './constants';
 
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');
@@ -12,6 +14,10 @@ const SignUpForm = ({ form, onSubmit }) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, serConfirmPassword] = useState('');
     const [error, setError] = useState(null);
+    const [emailInputErr, setEmailInputErr] = useState({
+      status: '',
+      message: ''
+    });
 
     const FormItem = Form.Item;
 
@@ -19,6 +25,7 @@ const SignUpForm = ({ form, onSubmit }) => {
         event.preventDefault();
         const submitButton = document.querySelector('.signup-form-button');
         submitButton.disabled = true;
+        resetEmailInputErr();
         if (newPassword !== confirmPassword) {
             setError('new password and confirm password do not match');
         } else {
@@ -35,6 +42,23 @@ const SignUpForm = ({ form, onSubmit }) => {
 
     const { getFieldDecorator } = form;
 
+    const resetEmailInputErr = () => {
+        setEmailInputErr({
+            status: '',
+            message: ''
+        });
+    };
+
+    const handleEmailInputBlur = event => {
+      const isEmailValid = isEmail(event.target.value);
+          if (!isEmailValid) {
+              setEmailInputErr({
+                status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+                message: EMAIL_ERROR_TYPES.INVALID.MESSAGE
+              })
+          }
+    };
+
     return (
         <FormContainer>
             <h1 className="title">Sign Up</h1>
@@ -47,10 +71,14 @@ const SignUpForm = ({ form, onSubmit }) => {
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Username"
                             onChange={event => setUsername(event.target.value)}
+                            
                         />
                     )}
                 </FormItem>
-                <FormItem>
+                <FormItem
+                    validateStatus={emailInputErr.status}
+                    help={emailInputErr.message}
+                >
                     {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your email!' }],
                     })(
@@ -58,6 +86,7 @@ const SignUpForm = ({ form, onSubmit }) => {
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Email"
                             onChange={event => setEmail(event.target.value)}
+                            onBlur={handleEmailInputBlur}
                         />
                     )}
                 </FormItem>
