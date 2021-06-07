@@ -1,5 +1,5 @@
 import { Form, Icon, Input } from 'antd';
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 
 import { byPropKey } from '../../utils';
 import { ErrorMessage } from './ErrorMessage';
