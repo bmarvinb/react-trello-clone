@@ -1,5 +1,6 @@
 import { Form, Icon, Input } from 'antd';
-import React, { useState, Component } from 'react';
+import React, { Component, useState } from 'react';
+import { isEmail } from 'validator';
 
 import { BOARDS } from '../../core/routes/routes';
 import { byPropKey } from '../../utils';
@@ -11,11 +12,16 @@ import { useStateValue } from '../redux/StateProvider';
 import { actionTypes } from '../redux/reducer';
 import { auth, provider } from '../../core/api/firebase';
 import { useHistory } from 'react-router';
+import { EMAIL_ERROR_TYPES } from './constants';
 
 const SignInForm = ({ history, form }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [emailInputErr, setEmailInputErr] = useState({
+      status: '',
+      message: ''
+    });
 
     const FormItem = Form.Item;
 
@@ -23,6 +29,7 @@ const SignInForm = ({ history, form }) => {
         event.preventDefault();
         const submitButton = document.querySelector('.login-form-button');
         submitButton.disabled = true;
+        resetEmailInputErr();
 
         return await doSignInWithEmailAndPassword(email, password)
             .then(() => {
@@ -53,11 +60,31 @@ const SignInForm = ({ history, form }) => {
 
     const { getFieldDecorator } = form;
 
+    const resetEmailInputErr = () => {
+        setEmailInputErr({
+            status: '',
+            message: ''
+        })
+    };
+
+    const handleEmailInputBlur = event => {
+        const isEmailValid = isEmail(event.target.value);
+            if (!isEmailValid) {
+                setEmailInputErr({
+                  status: EMAIL_ERROR_TYPES.INVALID.STATUS,
+                  message: EMAIL_ERROR_TYPES.INVALID.MESSAGE
+                })
+            }
+    };
+
     return (
         <FormContainer>
             <h1>Sign In</h1>
             <Form onSubmit={onSubmit}>
-                <FormItem>
+                <FormItem
+                    validateStatus={emailInputErr.status}
+                    help={emailInputErr.message}
+                >
                     {getFieldDecorator('email', {
                         rules: [{ required: true, message: 'Please input your email!' }],
                     })(
@@ -65,6 +92,7 @@ const SignInForm = ({ history, form }) => {
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Email"
                             onChange={event => setEmail(event.target.value)}
+                            onBlur={handleEmailInputBlur}
                         />
                     )}
                 </FormItem>
