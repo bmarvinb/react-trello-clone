@@ -7,9 +7,9 @@ import { ACCOUNT, BOARDS, SIGN_IN } from '../core/routes/routes';
 import { Button } from '../components/Button';
 import { Nav, NavItems, NavUser } from './styled';
 import { SignOutButton } from '../auth/SignOut';
-import { useStateValue } from '../auth/redux/StateProvider';
+import { useStateValue } from '../auth/api/StateProvider';
 import { auth } from '../core/api/firebase';
-import { actionTypes } from '../auth/redux/reducer';
+import { actionTypes } from '../auth/api/reducer';
 
 class NavigationAuth extends Component {
     signOut() {
