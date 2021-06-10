@@ -4,12 +4,12 @@ import { isEmail } from 'validator';
 import { Link } from 'react-router-dom';
 
 import { auth, provider } from '../core/api/firebase';
-import { FormContainer } from '../features/auth/components/FormContainer';
+import { FormContainer } from '../auth/components/FormContainer';
 import { BOARDS, LANDING, PASSWORD_FORGET, SIGN_UP } from '../core/routes/routes';
 import { signInWithEmailAndPassword } from '../core/api/auth';
-import { EMAIL_ERROR_TYPES } from '../features/auth/constants';
-import { FormButton } from '../features/auth/components/FormButton';
-import { ErrorMessage } from '../features/auth/components/ErrorMessage';
+import { EMAIL_ERROR_TYPES } from '../auth/constants';
+import { FormButton } from '../auth/components/FormButton';
+import { ErrorMessage } from '../auth/components/ErrorMessage';
 import { useStateValue } from '../core/api/StateProvider';
 import { actionTypes } from '../core/api/reducer';
 

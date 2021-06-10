@@ -6,7 +6,7 @@ import { CreateBoardModal } from '../features/boards/CreateBoardModal';
 import { createBoard, getBoards } from '../core/api/db';
 import { Spinner } from '../shared/components/Spinner';
 import { isEmpty, mergeDataWithKey } from '../shared/utils';
-import { withAuthorization } from '../features/auth/utils/AuthHOC';
+import { withAuthorization } from '../auth/utils/AuthHOC';
 import styled from 'styled-components';
 import { darken } from 'polished';
 

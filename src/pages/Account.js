@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 
 import { passwordUpdate } from '../core/api/auth';
 import { byPropKey } from '../shared/utils';
-import { ErrorMessage } from '../features/auth/components/ErrorMessage';
-import { FormButton } from '../features/auth/components/FormButton';
-import { FormContainer } from '../features/auth/components/FormContainer';
-import { AuthUserContext } from '../features/auth/utils/AuthUserContext';
-import { withAuthorization } from '../features/auth/utils/AuthHOC';
+import { ErrorMessage } from '../auth/components/ErrorMessage';
+import { FormButton } from '../auth/components/FormButton';
+import { FormContainer } from '../auth/components/FormContainer';
+import { AuthUserContext } from '../auth/utils/AuthUserContext';
+import { withAuthorization } from '../auth/utils/AuthHOC';
 
 const INITIAL_STATE = {
     passwordOne: '',

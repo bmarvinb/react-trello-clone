@@ -6,10 +6,10 @@ import { isEmail } from 'validator';
 import { LANDING } from '../core/routes/routes';
 import { createUser } from '../core/api/db';
 import { createUserWithEmailAndPassword } from '../core/api/auth';
-import { EMAIL_ERROR_TYPES } from '../features/auth/constants';
-import { FormContainer } from '../features/auth/components/FormContainer';
-import { FormButton } from '../features/auth/components/FormButton';
-import { ErrorMessage } from '../features/auth/components/ErrorMessage';
+import { EMAIL_ERROR_TYPES } from '../auth/constants';
+import { FormContainer } from '../auth/components/FormContainer';
+import { FormButton } from '../auth/components/FormButton';
+import { ErrorMessage } from '../auth/components/ErrorMessage';
 
 const SignUpForm = ({ form, onSubmit }) => {
     const [username, setUsername] = useState('');
