@@ -1,19 +1,17 @@
 import { db } from './firebase';
-import { getUser } from '../../auth/api/auth';
+import { getUser } from './auth';
 
 const boardsRef = db.ref('boards');
 const listsRef = db.ref('lists');
 const cardsRef = db.ref('cards');
 
-export const doCreateUser = (id, username, email) =>
+export const createUser = (id, username, email) =>
     db.ref(`users/${id}`).set({
         username,
         email,
     });
 
-export const onceGetUsers = () => db.ref('users').once('value');
-
-export const doCreateBoard = async board => {
+export const createBoard = async board => {
     const uid = getUser().uid;
     const id = boardsRef.push().key;
     await boardsRef.child(uid).child(id).set(board);
@@ -21,12 +19,12 @@ export const doCreateBoard = async board => {
     return board;
 };
 
-export const doDeleteBoard = async boardKey => {
+export const deleteBoard = async boardKey => {
     const uid = getUser().uid;
     await boardsRef.child(uid).child(boardKey).remove();
 };
 
-export const doUpdateBoard = async (boardKey, title) => {
+export const updateBoard = async (boardKey, title) => {
     const uid = getUser().uid;
     await boardsRef
         .child(uid)
@@ -36,12 +34,12 @@ export const doUpdateBoard = async (boardKey, title) => {
         });
 };
 
-export const onceGetBoards = () => {
+export const getBoards = () => {
     const uid = getUser().uid;
     return boardsRef.child(uid).once('value');
 };
 
-export const doEditBoard = async (boardKey, board) => {
+export const editBoard = async (boardKey, board) => {
     const uid = getUser().uid;
 
     await boardsRef
@@ -53,7 +51,7 @@ export const doEditBoard = async (boardKey, board) => {
     return board;
 };
 
-export const onceGetBoard = key => {
+export const getBoard = key => {
     const uid = getUser().uid;
 
     return boardsRef.child(uid).child(`${key}`).once('value');
@@ -75,7 +73,7 @@ export const doDeleteList = (boardKey, listKey) =>
         .remove()
         .then(() => db.ref('cards/').child(`${listKey}`).remove());
 
-export const doUpdateList = async (boardKey, listKey, list) => {
+export const updateList = async (boardKey, listKey, list) => {
     await listsRef
         .child(boardKey)
         .child(listKey)
@@ -85,14 +83,14 @@ export const doUpdateList = async (boardKey, listKey, list) => {
     return list;
 };
 
-export const doAddCard = (listKey, cardTitle) =>
+export const addCard = (listKey, cardTitle) =>
     db.ref(`cards/${listKey}`).push({
         title: cardTitle,
     });
 
-export const onceGetCard = listKey => db.ref(`cards/${listKey}`).once('value');
+export const getCard = listKey => db.ref(`cards/${listKey}`).once('value');
 
-export const doEditCard = async (listKey, cardKey, card) => {
+export const card = async (listKey, cardKey, card) => {
     await cardsRef
         .child(listKey)
         .child(cardKey)
@@ -103,7 +101,7 @@ export const doEditCard = async (listKey, cardKey, card) => {
     return card;
 };
 
-export const doMoveCard = (oldListKey, newListKey, cardKey, card) =>
+export const moveCard = (oldListKey, newListKey, cardKey, card) =>
     db
         .ref(`cards/${oldListKey}`)
         .child(`${cardKey}`)
@@ -114,4 +112,4 @@ export const doMoveCard = (oldListKey, newListKey, cardKey, card) =>
             })
         );
 
-export const doDeleteCard = (listKey, cardKey) => db.ref(`cards/${listKey}/`).child(`${cardKey}`).remove();
+export const deleteCard = (listKey, cardKey) => db.ref(`cards/${listKey}/`).child(`${cardKey}`).remove();

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import reducer, { initialState } from './core/api/reducer';
+import { StateProvider } from './core/api/StateProvider';
 import * as serviceWorker from './serviceWorker';
-import reducer, { initialState } from './auth/api/reducer';
-import { StateProvider } from './auth/api/StateProvider';
 
 ReactDOM.render(
     <React.StrictMode>
